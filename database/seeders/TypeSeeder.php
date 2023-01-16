@@ -19,7 +19,7 @@ class TypeSeeder extends Seeder
         $types = ['Front-end', 'Back-end', 'Full-stack', 'examples'];
         foreach ($types as $type) {
             $new_type = new Type();
-            $new_type->name;
+            $new_type->name = $type;
             $new_type->slug = Str::slug($type);
             $new_type->save();
         }
