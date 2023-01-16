@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Type;
 
 class Project extends Model
 {

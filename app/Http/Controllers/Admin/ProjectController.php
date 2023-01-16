@@ -9,6 +9,7 @@ use App\Models\Project;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Type;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -54,7 +55,7 @@ class ProjectController extends Controller
             $form_data['image'] = $path;
             $newProject->image = $path;
         }
-
+        $form_data['user_id'] = Auth::id();
         $newProject->save();
         // dd($form_data);
         return redirect()->route('admin.projects.show', $newProject->slug);
