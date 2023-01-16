@@ -1,0 +1,36 @@
+@import '~bootstrap/scss/bootstrap';
+
+.brand {
+    color: blueviolet
+}
+header .navbar-brand {
+    font-size:1.4rem;
+}
+.contact-info {
+    margin-right: 40px;
+    * {
+        margin: 0.2px 0;
+    }
+}
+.container-fluid .nav-link {
+    color: white;
+    &:hover {
+        color: rgb(135, 148, 212);
+    }
+}
+
+.container-fluid .nav-link-selected {
+    color: rgb(135, 148, 212);
+    border: 2px solid rgb(135, 148, 212);
+    border-radius: 10px;
+}
+header {
+    height: 50px;
+}
+#sidebarMenu {
+    height: calc(100vh - 50px);
+}
+main {
+    height: calc(100vh - 50px);
+    overflow:auto;
+}
