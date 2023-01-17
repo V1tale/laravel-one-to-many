@@ -55,8 +55,15 @@ class ProjectController extends Controller
             $form_data['image'] = $path;
             $newProject->image = $path;
         }
-        $form_data['user_id'] = Auth::id();
+        $form_data['type_id'] = Auth::id();
+        $newProject->type_id = $form_data['type_id'];
         $newProject->save();
+        // if ($request->has('type_id')) {
+        //     $type = Type::find('type_id');
+        //     if ($type) {
+        //         $newProject->type()->save($type);
+        //     }
+        // }
         // dd($form_data);
         return redirect()->route('admin.projects.show', $newProject->slug);
     }
@@ -93,15 +100,16 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        $form_data = $request->validated();
+        $form_data['slug'] = Str::slug($form_data['title']);
         if ($request->hasFile('image')) {
-            $form_data = $request->validated();
-            $form_data['slug'] = Str::slug($form_data['title']);
             if ($project->image) {
                 Storage::delete($project->image);
             }
             $path = Storage::put('images', $request->image);
             $form_data['image'] = $path;
         }
+        $form_data['type_id'] = Auth::id();
         $project->update($form_data);
         return redirect()->route('admin.projects.index')->with('message', "Il progetto $project->title è stato aggiornato");
     }
@@ -114,7 +122,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        Storage::delete($project->image);
+        !is_null($project->image) && Storage::delete($project->image);
+        // Storage::delete($project->image);
         $project->delete();
         return redirect()->route('admin.projects.index')->with('message', "'$project->title' è stato cancellato");
     }

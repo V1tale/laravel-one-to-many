@@ -24,7 +24,7 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'type_id' => ['nullable', 'exists:types,id'],
+            'type_id' => ['nullable'],
             'title' => 'required|max:150',
             'content' => 'required',
             'image' => ['nullable', 'image', 'max:600']
